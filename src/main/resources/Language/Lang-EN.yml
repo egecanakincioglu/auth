@@ -1,0 +1,3 @@
+COMMAND_HANDLER_PACKAGE: "com.egecanakincioglu.commands"
+COMMAND_LOADED: "Loaded command: "
+COMMAND_FAILED_TO_LOAD: "Failed to load command: "
