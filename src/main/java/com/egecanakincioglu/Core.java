@@ -19,7 +19,6 @@ public final class Core extends LoginException {
         try {
             JDABuilder auth = JDABuilder.createDefault(TOKEN)
                     .enableIntents(Arrays.asList(GatewayIntent.values()));
-            // .useSharding(0, 2);
 
             CommandHandler commandHandler = new CommandHandler();
             EventHandler eventHandler = new EventHandler();
