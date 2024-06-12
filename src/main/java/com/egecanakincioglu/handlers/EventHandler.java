@@ -1,34 +1,36 @@
 package com.egecanakincioglu.handlers;
 
-import com.egecanakincioglu.handlers.builders.EventBuilder;
-import com.egecanakincioglu.handlers.listeners.InteractionListener;
 import com.egecanakincioglu.utils.logger.Logger;
+
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+
 import org.reflections.Reflections;
+
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Set;
 
 public class EventHandler {
 
-    private final CommandHandler commandHandler;
-
-    public EventHandler(CommandHandler commandHandler) {
-        this.commandHandler = commandHandler;
-    }
-
-    public void loadEvents() {
+    public void loadEvents(JDABuilder bot) {
         Reflections reflections = new Reflections("com.egecanakincioglu.events");
-        Set<Class<? extends EventBuilder>> eventClasses = reflections.getSubTypesOf(EventBuilder.class);
+        Set<Class<? extends ListenerAdapter>> eventClasses = reflections.getSubTypesOf(ListenerAdapter.class);
+        ArrayList<ListenerAdapter> events = new ArrayList<>();
 
-        for (Class<? extends EventBuilder> eventClass : eventClasses) {
+        for (Class<? extends ListenerAdapter> eventClass : eventClasses) {
             try {
-                EventBuilder event = eventClass.getDeclaredConstructor().newInstance();
-                event.execute(null);
+                ListenerAdapter event = eventClass.getDeclaredConstructor().newInstance();
+                events.add(event);
                 Logger.info("Loaded event: " + eventClass.getSimpleName());
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException
+                    | NoSuchMethodException e) {
                 Logger.error("Failed to load event: " + eventClass.getSimpleName());
                 e.printStackTrace();
             }
         }
-        new InteractionListener(commandHandler);
+
+        ListenerAdapter[] listenersArray = events.toArray(new ListenerAdapter[0]);
+        bot.addEventListeners((Object[]) listenersArray);
     }
 }
