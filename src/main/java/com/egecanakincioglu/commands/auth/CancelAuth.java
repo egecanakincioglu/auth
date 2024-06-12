@@ -1,4 +1,4 @@
 package com.egecanakincioglu.commands.auth;
 
-public class setupAuth {
+public class CancelAuth {
 }

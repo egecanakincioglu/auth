@@ -1,4 +1,4 @@
 package com.egecanakincioglu.handlers.listeners;
 
-public class commandListener {
+public class CommandListener {
 }

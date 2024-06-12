@@ -1,4 +1,4 @@
 package com.egecanakincioglu.handlers;
 
-public class commandHandler {
+public class CommandHandler {
 }

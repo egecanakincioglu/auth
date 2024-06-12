@@ -1,4 +1,4 @@
 package com.egecanakincioglu.handlers;
 
-public class eventHandler {
+public class EventHandler {
 }
