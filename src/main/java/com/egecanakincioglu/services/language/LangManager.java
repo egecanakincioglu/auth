@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 public class LangManager {
-    private static Map<String[], Object> languageData;
+    private static Map<String, Object> languageData;
 
     static {
         String locale = Config.getLocale();
