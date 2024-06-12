@@ -20,6 +20,14 @@ public class Logger {
         log("ERROR", message);
     }
 
+    public static void command(String message) {
+        log("COMMAND", message);
+    }
+
+    public static void event(String message) {
+        log("COMMAND", message);
+    }
+
     private static void log(String level, String message) {
         String time = LocalDateTime.now().format(formatter);
         System.out.println(String.format("[%s] [%s] [%s] %s", time, BOT_NAME, level, message));
