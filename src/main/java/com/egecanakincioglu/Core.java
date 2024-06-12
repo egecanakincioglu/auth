@@ -2,6 +2,7 @@ package com.egecanakincioglu;
 
 import com.egecanakincioglu.handlers.CommandHandler;
 import com.egecanakincioglu.handlers.EventHandler;
+import com.egecanakincioglu.services.config.Config;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -12,12 +13,14 @@ import java.util.Arrays;
 
 public final class Core extends LoginException {
     public static void main(String[] arguments) {
-        final String TOKEN = "";
+
+        Config.initialize("Config.yml");
+        final String BOT_TOKEN = Config.getToken();
 
         JDALogger.setFallbackLoggerEnabled(false);
 
         try {
-            JDABuilder auth = JDABuilder.createDefault(TOKEN)
+            JDABuilder auth = JDABuilder.createDefault(BOT_TOKEN)
                     .enableIntents(Arrays.asList(GatewayIntent.values()));
 
             CommandHandler commandHandler = new CommandHandler();
