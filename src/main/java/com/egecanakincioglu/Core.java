@@ -17,17 +17,18 @@ public final class Core extends LoginException {
         JDALogger.setFallbackLoggerEnabled(false);
 
         try {
-            JDA auth = JDABuilder.createDefault(TOKEN)
-                    .enableIntents(Arrays.asList(GatewayIntent.values()))
-                    .useSharding(0, 2)
-                    .build();
+            JDABuilder auth = JDABuilder.createDefault(TOKEN)
+                    .enableIntents(Arrays.asList(GatewayIntent.values()));
+            // .useSharding(0, 2);
 
             CommandHandler commandHandler = new CommandHandler();
-            EventHandler eventHandler = new EventHandler(commandHandler);
-            eventHandler.loadEvents();
+            EventHandler eventHandler = new EventHandler();
+            eventHandler.loadEvents(auth);
 
-            commandHandler.registerCommands(auth);
-            auth.awaitReady();
+            JDA bot = auth.build();
+
+            commandHandler.registerCommands(bot);
+            bot.awaitReady();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
