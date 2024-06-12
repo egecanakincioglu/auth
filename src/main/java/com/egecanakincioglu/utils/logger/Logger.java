@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Logger {
 
-    private static final String AUTH = "Auth";
+    private static final String BOT_NAME = "Auth";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     public static void info(String message) {
@@ -22,6 +22,6 @@ public class Logger {
 
     private static void log(String level, String message) {
         String time = LocalDateTime.now().format(formatter);
-        System.out.println(String.format("[%s] [%s] [%s] %s", time, AUTH, level, message));
+        System.out.println(String.format("[%s] [%s] [%s] %s", time, BOT_NAME, level, message));
     }
 }
