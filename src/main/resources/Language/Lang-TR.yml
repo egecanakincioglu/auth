@@ -1,3 +1,3 @@
 COMMAND_HANDLER_PACKAGE: "com.egecanakincioglu.commands"
-COMMAND_LOADED: "Yüklenen komut: "
-COMMAND_FAILED_TO_LOAD: "Komut yüklenirken hata meydana geldi: "
+COMMAND_LOADED: "Command loaded: "
+COMMAND_FAILED_TO_LOAD: "An error occurred while loading the command: "
