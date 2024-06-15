@@ -10,16 +10,16 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class Commands extends ListenerAdapter {
-  @Override
-  public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent event) {
-    String commandName = event.getName();
-    CommandBuilder command = CommandHandler.commands.get(commandName);
+    @Override
+    public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent event) {
+        String commandName = event.getName();
+        CommandBuilder command = CommandHandler.commands.get(commandName);
 
-    if (command != null) {
-      LogFactory.command("Executing command: " + commandName);
-      command.execute(event);
-    } else {
-      LogFactory.warn("Unknown command: " + commandName);
+        if (command != null) {
+            LogFactory.command("Executing command: " + commandName);
+            command.execute(event);
+        } else {
+            LogFactory.warn("Unknown command: " + commandName);
+        }
     }
-  }
 }

@@ -13,7 +13,8 @@ public class InteractionListener extends ListenerAdapter {
     }
 
     public void onInteractionCreate(SlashCommandInteractionEvent event) {
-        if (!event.isFromGuild()) return;
+        if (!event.isFromGuild())
+            return;
 
         commandHandler.onSlashCommandInteraction(event);
     }
