@@ -56,7 +56,7 @@ public class Config {
         for (int i = 0; i < keys.length - 1; i++) {
             Object value = currentMap.get(keys[i]);
             if (value instanceof Map) {
-                //noinspection unchecked
+                // noinspection unchecked
                 currentMap = (Map<String, Object>) value;
             } else {
                 throw new IllegalArgumentException("Invalid key path: " + key);
