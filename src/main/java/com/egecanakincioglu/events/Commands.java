@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import com.egecanakincioglu.handlers.CommandHandler;
 import com.egecanakincioglu.handlers.builders.CommandBuilder;
-import com.egecanakincioglu.utils.logger.LogFactory;
+import com.egecanakincioglu.utils.system.Logger;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -16,10 +16,10 @@ public class Commands extends ListenerAdapter {
         CommandBuilder command = CommandHandler.commands.get(commandName);
 
         if (command != null) {
-            LogFactory.command("Executing command: " + commandName);
+            Logger.command("Executing command: " + commandName);
             command.execute(event);
         } else {
-            LogFactory.warn("Unknown command: " + commandName);
+            Logger.warn("Unknown command: " + commandName);
         }
     }
 }
