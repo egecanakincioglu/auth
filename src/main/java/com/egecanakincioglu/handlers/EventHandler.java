@@ -1,6 +1,6 @@
 package com.egecanakincioglu.handlers;
 
-import com.egecanakincioglu.utils.logger.LogFactory;
+import com.egecanakincioglu.utils.system.Logger;
 
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -22,10 +22,10 @@ public class EventHandler {
             try {
                 ListenerAdapter event = eventClass.getDeclaredConstructor().newInstance();
                 events.add(event);
-                LogFactory.info("Loaded event: " + eventClass.getSimpleName());
+                Logger.info("Loaded event: " + eventClass.getSimpleName());
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException
                     | NoSuchMethodException e) {
-                LogFactory.error("Failed to load event: " + eventClass.getSimpleName());
+                Logger.error("Failed to load event: " + eventClass.getSimpleName());
                 e.printStackTrace();
             }
         }
