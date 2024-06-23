@@ -1,9 +1,9 @@
-package com.egecanakincioglu.utils.logger;
+package com.egecanakincioglu.utils.system;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class LogFactory {
+public class Logger {
 
     private static final String BOT_NAME = "Auth";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
