@@ -2,7 +2,7 @@ package com.egecanakincioglu.handlers;
 
 import com.egecanakincioglu.handlers.builders.CommandBuilder;
 import com.egecanakincioglu.services.language.StringManager;
-import com.egecanakincioglu.utils.logger.LogFactory;
+import com.egecanakincioglu.utils.system.Logger;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
@@ -36,10 +36,10 @@ public class CommandHandler extends ListenerAdapter {
             try {
                 CommandBuilder command = commandClass.getDeclaredConstructor().newInstance();
                 commands.put(command.getName(), command);
-                LogFactory.command(COMMAND_LOADED + command.getName());
+                Logger.command(COMMAND_LOADED + command.getName());
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException
                     | NoSuchMethodException e) {
-                LogFactory.error(COMMAND_FAILED_TO_LOAD + commandClass.getSimpleName());
+                Logger.error(COMMAND_FAILED_TO_LOAD + commandClass.getSimpleName());
                 e.printStackTrace();
             }
         }
