@@ -1,3 +1,11 @@
 COMMAND_HANDLER_PACKAGE: "com.egecanakincioglu.commands"
 COMMAND_LOADED: "Yüklenen komut: "
 COMMAND_FAILED_TO_LOAD: "Komut yükleme sırasında hata meydana geldi: "
+
+PING_TITLE: ""
+PING_MESSAGE_LATENCY: ""
+PING_WEBSOCKET_LATENCY: ""
+PING_API_LATENCY: ""
+PING_FOOTER: ""
+PING_ERROR_TITLE: ""
+PING_ERROR: ""
