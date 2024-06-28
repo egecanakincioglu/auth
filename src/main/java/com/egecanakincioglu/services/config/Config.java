@@ -1,5 +1,6 @@
 package com.egecanakincioglu.services.config;
 
+import org.jetbrains.annotations.NotNull;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -37,26 +38,30 @@ public class Config {
         }
     }
 
+    @NotNull
     public static String getToken() {
         return getString("BOT_TOKEN");
     }
 
+    @NotNull
     public static String getName() {
-        return getString("BOT_NAME");
+        return getString("GLOBAL_BOT_NAME");
     }
 
+    @NotNull
     public static String getLocale() {
         return getString("LOCALE");
     }
 
-    private static String getString(String key) {
+    @NotNull
+    @SuppressWarnings("unchecked")
+    private static String getString(@NotNull String key) {
         String[] keys = key.split("\\.");
         Map<String, Object> currentMap = data;
 
         for (int i = 0; i < keys.length - 1; i++) {
             Object value = currentMap.get(keys[i]);
             if (value instanceof Map) {
-                // noinspection unchecked
                 currentMap = (Map<String, Object>) value;
             } else {
                 throw new IllegalArgumentException("Invalid key path: " + key);
