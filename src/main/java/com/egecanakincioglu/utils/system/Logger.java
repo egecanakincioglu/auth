@@ -25,7 +25,11 @@ public class Logger {
     }
 
     public static void event(String message) {
-        log("COMMAND", message);
+        log("EVENT", message);
+    }
+
+    public static void database(String message) {
+        log("SQL", message);
     }
 
     private static void log(String level, String message) {
