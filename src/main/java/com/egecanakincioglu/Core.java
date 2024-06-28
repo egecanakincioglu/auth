@@ -1,5 +1,6 @@
 package com.egecanakincioglu;
 
+import com.egecanakincioglu.database.SQLiteDatabaseSetup;
 import com.egecanakincioglu.handlers.CommandHandler;
 import com.egecanakincioglu.handlers.EventHandler;
 import com.egecanakincioglu.services.config.Config;
@@ -18,6 +19,7 @@ public final class Core extends LoginException {
         final String BOT_TOKEN = Config.getToken();
 
         JDALogger.setFallbackLoggerEnabled(false);
+        SQLiteDatabaseSetup.setupDatabase();
 
         try {
             JDABuilder auth = JDABuilder.createDefault(BOT_TOKEN)
