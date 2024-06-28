@@ -38,7 +38,7 @@ public class CommandHandler extends ListenerAdapter {
                 commands.put(command.getName(), command);
                 Logger.command(COMMAND_LOADED + command.getName());
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException
-                    | NoSuchMethodException e) {
+                     | NoSuchMethodException e) {
                 Logger.error(COMMAND_FAILED_TO_LOAD + commandClass.getSimpleName());
                 e.printStackTrace();
             }
@@ -47,9 +47,9 @@ public class CommandHandler extends ListenerAdapter {
 
     public void registerCommands(JDA jda) {
         jda.updateCommands().addCommands(
-                commands.values().stream()
-                        .map(cmd -> Commands.slash(cmd.getName(), cmd.getDescription()))
-                        .toArray(net.dv8tion.jda.api.interactions.commands.build.CommandData[]::new))
+                        commands.values().stream()
+                                .map(CommandBuilder::getSlashCommandData)
+                                .toArray(net.dv8tion.jda.api.interactions.commands.build.CommandData[]::new))
                 .queue();
     }
 }
