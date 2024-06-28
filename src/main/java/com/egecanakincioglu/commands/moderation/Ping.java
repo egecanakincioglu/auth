@@ -1,7 +1,10 @@
 package com.egecanakincioglu.commands.moderation;
 
 import com.egecanakincioglu.handlers.builders.CommandBuilder;
+import com.egecanakincioglu.interfaces.moderation.PingInterface;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.SelfUser;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 import java.util.concurrent.CompletableFuture;
@@ -19,22 +22,28 @@ public class Ping extends CommandBuilder {
             long messageLatency = end - start;
 
             JDA jda = event.getJDA();
+            SelfUser botUser = jda.getSelfUser();
+            Member member = event.getMember(); // Kullanıcıyı sunucudaki üye olarak alıyoruz
+
+            if (member == null) {
+                interactionHook.editOriginal("Failed to retrieve member information.").queue();
+                return;
+            }
 
             CompletableFuture<Long> restPingFuture = jda.getRestPing().submit();
 
             restPingFuture.thenAccept(restPing -> {
                 long gatewayPing = jda.getGatewayPing();
 
-                String response = String.format(
-                        "Message Latency: `%d ms`\n" +
-                                "WebSocket Latency: `%d ms`\n" +
-                                "API Latency: `%d ms`",
-                        messageLatency, gatewayPing, restPing
-                );
-
-                interactionHook.editOriginal(response).queue();
+                PingInterface pingInterface = new PingInterface();
+                interactionHook.editOriginal("Latency metrics calculated")
+                        .setEmbeds(pingInterface.createLatencyEmbed(messageLatency, gatewayPing, restPing, botUser, member).build())
+                        .queue();
             }).exceptionally(ex -> {
-                interactionHook.editOriginal("Failed to calculate API latency: " + ex.getMessage()).queue();
+                PingInterface pingInterface = new PingInterface();
+                interactionHook.editOriginal("Latency metrics calculated")
+                        .setEmbeds(pingInterface.createErrorEmbed(ex.getMessage(), botUser, member).build())
+                        .queue();
                 return null;
             });
         });
